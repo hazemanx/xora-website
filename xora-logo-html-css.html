@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XORA</title>
+    <title>XORA - Xceptional Organization of Robust Assets</title>
+    <meta name="description" content="XORA provides exceptional organization of robust assets for modern businesses.">
     <style>
         @font-face {
             font-family: 'Sweet Sans Pro Medium';
@@ -13,35 +14,137 @@
             font-family: 'Helvetica Neue LT Std 33 Thin Extended';
             src: url('HelveticaNeueLTStd-ThEx.otf') format('opentype');
         }
-        body {
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue LT Std 33 Thin Extended', sans-serif;
             background-color: black;
             color: white;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            padding: 20px 0;
         }
-        .logo-container {
-            text-align: center;
-        }
-        .main-logo {
+        .logo {
             font-family: 'Sweet Sans Pro Medium', sans-serif;
-            font-size: 4rem;
+            font-size: 2rem;
             letter-spacing: 0.5rem;
-            margin-bottom: 0.5rem;
         }
-        .tagline {
-            font-family: 'Helvetica Neue LT Std 33 Thin Extended', sans-serif;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #888;
+        }
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        section {
+            padding: 50px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (max-width: 768px) {
+            .logo { font-size: 1.5rem; }
+            nav ul li { display: block; margin: 10px 0; }
+            .hero h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="logo-container">
-        <div class="main-logo">XORA</div>
-        <div class="tagline">Xceptional Organization of Robust Assets</div>
+    <div class="container">
+        <header>
+            <div class="logo">XORA</div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <h1>XORA</h1>
+            <p>Xceptional Organization of Robust Assets</p>
+        </section>
+        
+        <section id="about">
+            <h2>About Us</h2>
+            <p>XORA is dedicated to providing exceptional organizational solutions for robust assets.</p>
+        </section>
+        
+        <section id="products">
+            <h2>Our Products</h2>
+            <p>Discover our range of innovative asset management tools.</p>
+        </section>
+        
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Get in touch to learn how XORA can transform your asset management.</p>
+        </section>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
